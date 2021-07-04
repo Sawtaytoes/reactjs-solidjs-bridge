@@ -1,7 +1,4 @@
 import {
-  Fragment,
-} from 'react'
-import {
   render,
 } from 'react-dom'
 
@@ -26,10 +23,8 @@ render(
           })
         )}
       >
-        <Fragment>
-          <ReactComponent />
-          <ReactContextConsumer />
-        </Fragment>
+        <ReactComponent />
+        <ReactContextConsumer />
       </ReactToSolidBridge>
     </ReactContextProvider>
   ),
