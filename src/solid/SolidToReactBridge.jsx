@@ -1,5 +1,7 @@
 import {
-  createPortal,
+  createElement,
+} from 'react'
+import {
   render,
   unmountComponentAtNode,
 } from 'react-dom'
@@ -8,36 +10,90 @@ import {
   createSignal,
   onCleanup,
 } from 'solid-js'
+import {
+  Portal,
+} from 'solid-js/web'
 
-// Bridge component that portals React children into a Solid element.
+import BridgePortalElementChild from '../react/BridgePortalElementChild.jsx'
+import BridgePortalElementContext from '../react/BridgePortalElementContext.js'
+
 const SolidToReactBridge = ({
-  children: reactComponentChildren,
+  children,
+  getReactComponent,
 }) => {
-  const domElement = (
-    <div />
+  const [
+    portalDomElement,
+    setPortalDomElement,
+  ] = (
+    createSignal()
   )
+
+  let solidToReactElementRef = {
+    current: null,
+  }
 
   createEffect(
     () => {
       render(
         (
-          createPortal(
-            reactComponentChildren,
-            domElement,
+          createElement(
+            (
+              BridgePortalElementContext
+              .Provider
+            ),
+            {
+              children: (
+                getReactComponent({
+                  getChildren: () => (
+                    createElement(
+                      BridgePortalElementChild
+                    )
+                  )
+                })
+              ),
+              value: {
+                getChildElement: (
+                  setPortalDomElement
+                )
+              },
+            }
           )
         ),
-        domElement,
+        (
+          solidToReactElementRef
+          .current
+        ),
       )
 
       onCleanup(() => {
         unmountComponentAtNode(
-          domElement
+          solidToReactElementRef
+          .current
         )
       })
     },
   )
 
-  return domElement
+  return (
+    <div
+      ref={
+        solidToReactElementRef
+        .current
+      }
+    >
+      {
+        children
+        && portalDomElement()
+        && (
+          <Portal
+            mount={portalDomElement()}
+          >
+            {children}
+          </Portal>
+        )
+      }
+    </div>
+  )
 }
 
 export default SolidToReactBridge

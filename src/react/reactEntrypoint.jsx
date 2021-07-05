@@ -7,18 +7,19 @@ import ReactContextConsumer from './ReactContextConsumer.jsx'
 import ReactContextProvider from './ReactContextProvider.jsx'
 import ReactToSolidBridge from './ReactToSolidBridge.jsx'
 import SolidComponent from '../solid/SolidComponent.jsx'
-import SolidToReactBridge from '../solid/SolidToReactBridge.jsx'
 
 render(
   (
     <ReactContextProvider>
+      <ReactContextConsumer />
+
       <ReactToSolidBridge
         getSolidComponent={({
-          getReactElementChildren,
+          getChildren,
         }) => (
           SolidComponent({
             get children() {
-              return getReactElementChildren()
+              return getChildren()
             }
           })
         )}
@@ -31,7 +32,7 @@ render(
   (
     document
     .querySelector(
-      '#root'
+      '#react-root'
     )
   ),
 )

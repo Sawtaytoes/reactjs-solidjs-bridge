@@ -2,14 +2,14 @@ import {
   useContext,
 } from 'solid-js'
 
-import ReactPortalElementContext from '../solid/ReactPortalElementContext'
+import BridgePortalElementContext from '../solid/BridgePortalElementContext'
 
-const ReactPortalElementChild = () => {
+const BridgePortalElementChild = () => {
   const {
     getChildElement,
   } = (
     useContext(
-      ReactPortalElementContext
+      BridgePortalElementContext
     )
   )
   
@@ -22,4 +22,4 @@ const ReactPortalElementChild = () => {
   return domElement
 }
 
-export default ReactPortalElementChild
+export default BridgePortalElementChild

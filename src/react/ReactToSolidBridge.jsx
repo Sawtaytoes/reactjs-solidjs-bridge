@@ -6,10 +6,12 @@ import {
 import {
   createPortal,
 } from 'react-dom'
-import { render } from 'solid-js/web'
+import {
+  render,
+} from 'solid-js/web'
 
-import ReactPortalElementChild from '../solid/ReactPortalElementChild.jsx'
-import ReactPortalElementContext from '../solid/ReactPortalElementContext.js'
+import BridgePortalElementChild from '../solid/BridgePortalElementChild.jsx'
+import BridgePortalElementContext from '../solid/BridgePortalElementContext.js'
 
 const ReactToSolidBridge = ({
   children,
@@ -36,14 +38,14 @@ const ReactToSolidBridge = ({
       const dispose = (
         render(
           () => (
-            ReactPortalElementContext
+            BridgePortalElementContext
             .Provider({
               get children() {
                 return (
                   getSolidComponentRef
                   .current({
-                    getReactElementChildren: (
-                      ReactPortalElementChild
+                    getChildren: (
+                      BridgePortalElementChild
                     )
                   })
                 )
