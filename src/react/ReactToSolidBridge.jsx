@@ -24,13 +24,6 @@ const ReactToSolidBridge = ({
     useState()
   )
 
-  const getSolidComponentRef = useRef()
-
-  getSolidComponentRef
-  .current = (
-    getSolidComponent
-  )
-
   const reactToSolidElementRef = useRef()
 
   useEffect(
@@ -42,8 +35,7 @@ const ReactToSolidBridge = ({
             .Provider({
               get children() {
                 return (
-                  getSolidComponentRef
-                  .current({
+                  getSolidComponent({
                     getChildren: (
                       BridgePortalElementChild
                     )
@@ -68,7 +60,9 @@ const ReactToSolidBridge = ({
         dispose()
       }
     },
-    [],
+    [
+      getSolidComponent,
+    ],
   )
 
   return (
