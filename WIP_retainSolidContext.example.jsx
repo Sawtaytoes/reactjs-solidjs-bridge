@@ -176,9 +176,16 @@ const ReactToSolidBridge = () => {
             })
           )
 
-          addSolidChild(
-            solidChild
-          )
+          if (addSolidChild) {
+            addSolidChild(
+              solidChild
+            )
+          }
+          else {
+            throw new Error(
+              'You need to wrap `ReactToSolidBridge` in a `ReactToSolidBridgeProvider` component at the top-level of your React app.'
+            )
+          }
 
           return solidChild
         },
