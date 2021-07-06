@@ -33,16 +33,12 @@ const SolidBridgeContainer = ({
     })
   })
 
-  // createEffect(() => {
-  //   console.log(children())
-  // })
-
   return (
     <For each={children()}>
       {(
-        SolidChildComponent,
+        ChildComponent,
       ) => (
-        <SolidChildComponent />
+        <ChildComponent />
       )}
     </For>
   )
