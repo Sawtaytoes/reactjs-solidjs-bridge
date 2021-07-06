@@ -3,7 +3,7 @@ const ReactComponent = ({
 }) => (
   <fieldset>
     <div>
-      I'm a React component.
+      React component.
     </div>
 
     {

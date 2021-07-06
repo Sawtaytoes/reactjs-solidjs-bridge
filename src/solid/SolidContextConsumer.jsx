@@ -15,9 +15,9 @@ const SolidContextConsumer = () => {
   )
 
   return (
-    <div>
+    <fieldset>
       <div>
-        I'm a Solid context consumer.
+        Solid context consumer.
       </div>
 
       <button
@@ -26,7 +26,7 @@ const SolidContextConsumer = () => {
       >
         {count()}
       </button>
-    </div>
+    </fieldset>
   )
 }
 

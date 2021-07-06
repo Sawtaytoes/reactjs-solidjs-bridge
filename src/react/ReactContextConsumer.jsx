@@ -15,9 +15,9 @@ const ReactContextConsumer = () => {
   )
 
   return (
-    <div>
+    <fieldset>
       <div>
-        I'm a React context consumer.
+        React context consumer.
       </div>
 
       <button
@@ -26,7 +26,7 @@ const ReactContextConsumer = () => {
       >
         {count}
       </button>
-    </div>
+    </fieldset>
   )
 }
 

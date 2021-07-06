@@ -3,7 +3,7 @@ const SolidComponent = ({
 }) => (
   <fieldset>
     <div>
-      I'm a Solid component.
+      Solid component.
     </div>
 
     {
