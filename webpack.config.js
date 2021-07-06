@@ -26,6 +26,7 @@ const webpackConfig = {
     hot: true,
     publicPath: '/',
   },
+  devtool: 'eval-source-map',
   entry: {
     reactBundle: './src/react/reactEntrypoint.jsx',
     solidBundle: './src/solid/solidEntrypoint.jsx',
