@@ -39,7 +39,11 @@ render(
                     get children() {
                       return [
                         SolidContextConsumer(),
-                        getChildren(),
+                        SolidComponent({
+                          get children() {
+                            return getChildren()
+                          },
+                        }),
                       ]
                     },
                     value: {
@@ -61,50 +65,35 @@ render(
               >
                 <ReactContextConsumer />
 
-                <ReactToSolidBridge
-                  getSolidComponent={({
-                    getChildren,
-                    props,
-                  }) => ([
-                    SolidContextConsumer(),
-                    SolidStatefulComponent({
-                      count: (
-                        props
-                        .count
-                      ),
-                    }),
-                    getChildren(),
-                  ])}
-                  props={{
-                    count,
-                  }}
-                >
-                  <ReactContextConsumer />
-                  <ReactStatefulComponent
-                    count={count}
-                  />
-                </ReactToSolidBridge>
+                <ReactComponent>
+                  <ReactToSolidBridge
+                    getSolidComponent={({
+                      getChildren,
+                      props,
+                    }) => ([
+                      SolidContextConsumer(),
+                      SolidStatefulComponent({
+                        count: (
+                          props
+                          .count
+                        ),
+                      }),
+                      getChildren(),
+                    ])}
+                    props={{
+                      count,
+                    }}
+                  >
+                    <ReactContextConsumer />
+                    <ReactStatefulComponent
+                      count={count}
+                    />
+                  </ReactToSolidBridge>
+                </ReactComponent>
               </ReactToSolidBridge>
             )
           }
         </ReactContext.Consumer>
-
-        {/*
-        <ReactToSolidBridge
-          getSolidComponent={({
-            getChildren,
-          }) => (
-            SolidComponent({
-              get children() {
-                return getChildren()
-              }
-            })
-          )}
-        >
-          <ReactComponent />
-          <ReactContextConsumer />
-        </ReactToSolidBridge>
-        */}
       </ReactContextProvider>
     </ReactToSolidBridgeProvider>
   ),
