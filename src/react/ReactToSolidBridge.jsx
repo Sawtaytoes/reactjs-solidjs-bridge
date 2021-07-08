@@ -9,6 +9,9 @@ import {
   createPortal,
 } from 'react-dom'
 import {
+  createSignal,
+} from 'solid-js'
+import {
   Portal,
 } from 'solid-js/web'
 
@@ -18,9 +21,12 @@ import ReactToSolidBridgeContext from './ReactToSolidBridgeContext.js'
 import SolidBridgeContainer from '../solid/SolidBridgeContainer.jsx'
 import useItems from './useItems.js'
 
+const initialSolidSignals = {}
+
 const ReactToSolidBridge = ({
   children,
   getSolidComponent,
+  props,
 }) => {
   const {
     addSolidChild,
@@ -56,6 +62,109 @@ const ReactToSolidBridge = ({
     getSolidComponent
   )
 
+  const propsRef = useRef()
+
+  propsRef
+  .current = (
+    props
+  )
+
+  const solidPropsRef = useRef()
+
+  const solidSignalsRef = (
+    useRef(
+      initialSolidSignals
+    )
+  )
+
+  useEffect(
+    () => {
+      for (let prop in (props?.values || props)) {
+        if (
+          typeof (
+            props
+            [prop]
+          )
+          === 'function'
+        ) {
+          if (
+            !(
+              solidSignalsRef
+              .current
+              [prop]
+            )
+          ) {
+            solidSignalsRef
+            .current
+            [prop] = [
+              (
+                ...args
+              ) => (
+                propsRef
+                .current
+                [prop](
+                  ...args
+                )
+              )
+            ]
+          }
+        }
+        else {
+          if (
+            !(
+              solidSignalsRef
+              .current
+              [prop]
+            )
+          ) {
+            solidSignalsRef
+            .current
+            [prop] = (
+              createSignal(
+                props
+                [prop]
+              )
+            )
+          }
+          else {
+            solidSignalsRef
+            .current
+            [prop]
+            [1](
+              props
+              [prop]
+            )
+          }
+        }
+      }
+
+      solidPropsRef
+      .current = (
+        Object
+        .fromEntries(
+          Object
+          .entries(
+            solidSignalsRef
+            .current
+          )
+          .map(([
+            key,
+            value,
+          ]) => ([
+            key,
+            (
+              value
+              [0]
+            ),
+          ]))
+        )
+      )
+    },
+    [
+      props,
+    ],
+  )
+
   useEffect(
     () => {
       if (!addSolidChild) {
@@ -87,6 +196,10 @@ const ReactToSolidBridge = ({
                           })
                         )
                       ]),
+                      props: (
+                        solidPropsRef
+                        .current
+                      ),
                     })
                   )
                 },
