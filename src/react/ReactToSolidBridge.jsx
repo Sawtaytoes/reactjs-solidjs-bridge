@@ -138,27 +138,34 @@ const ReactToSolidBridge = ({
         }
       }
 
-      solidPropsRef
-      .current = (
-        Object
-        .fromEntries(
-          Object
-          .entries(
-            solidSignalsRef
-            .current
-          )
-          .map(([
-            key,
-            value,
-          ]) => ([
-            key,
-            (
-              value
-              [0]
-            ),
-          ]))
+      if (
+        !(
+          solidPropsRef
+          .current
         )
-      )
+      ) {
+        solidPropsRef
+        .current = (
+          Object
+          .fromEntries(
+            Object
+            .entries(
+              solidSignalsRef
+              .current
+            )
+            .map(([
+              key,
+              value,
+            ]) => ([
+              key,
+              (
+                value
+                [0]
+              ),
+            ]))
+          )
+        )
+      }
     },
     [
       props,
