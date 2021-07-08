@@ -88,6 +88,9 @@ render(
                     }),
                     getChildren(),
                   ])}
+                  props={{
+                    count,
+                  }}
                 >
                   <ReactContextConsumer />
                   <ReactStatefulComponent
