@@ -37,14 +37,13 @@ render(
                   SolidContext
                   .Provider({
                     get children() {
-                      return [
-                        SolidContextConsumer(),
+                      return (
                         SolidComponent({
                           get children() {
                             return getChildren()
                           },
-                        }),
-                      ]
+                        })
+                      )
                     },
                     value: {
                       count: (
