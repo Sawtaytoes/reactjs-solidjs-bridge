@@ -15,7 +15,6 @@ import ReactToSolidBridgeProvider from './ReactToSolidBridgeProvider.jsx'
 import SolidComponent from '../solid/SolidComponent.jsx'
 import SolidContext from '../solid/SolidContext.js'
 import SolidContextConsumer from '../solid/SolidContextConsumer.jsx'
-import SolidContextProvider from '../solid/SolidContextProvider.jsx'
 import SolidStatefulComponent from '../solid/SolidStatefulComponent.jsx'
 
 render(
@@ -34,39 +33,27 @@ render(
                 getSolidComponent={({
                   getChildren,
                   props,
-                }) => ([
-                  // (
-                  //   SolidContextProvider({
-                  //     get children() {
-                  //       return [
-                  //         SolidContextConsumer(),
-                  //         getChildren(),
-                  //       ]
-                  //     }
-                  //   })
-                  // ),
-                  (
-                    SolidContext
-                    .Provider({
-                      get children() {
-                        return [
-                          SolidContextConsumer(),
-                          getChildren(),
-                        ]
-                      },
-                      value: {
-                        count: (
-                          props
-                          .count
-                        ),
-                        incrementCount: (
-                          props
-                          .incrementCount
-                        ),
-                      },
-                    })
-                  ),
-                ])}
+                }) => (
+                  SolidContext
+                  .Provider({
+                    get children() {
+                      return [
+                        SolidContextConsumer(),
+                        getChildren(),
+                      ]
+                    },
+                    value: {
+                      count: (
+                        props
+                        .count
+                      ),
+                      incrementCount: (
+                        props
+                        .incrementCount
+                      ),
+                    },
+                  })
+                )}
                 props={{
                   count,
                   incrementCount,
