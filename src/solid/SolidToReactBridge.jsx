@@ -17,10 +17,9 @@ import {
 import BridgePortalElementChild from '../react/BridgePortalElementChild.jsx'
 import BridgePortalElementContext from '../react/BridgePortalElementContext.js'
 
-const SolidToReactBridge = ({
-  children,
-  getReactComponent,
-}) => {
+const SolidToReactBridge = (
+  props,
+) => {
   const [
     portalDomElement,
     setPortalDomElement,
@@ -43,7 +42,8 @@ const SolidToReactBridge = ({
             ),
             {
               children: (
-                getReactComponent({
+                props
+                .getReactComponent({
                   getChildren: () => (
                     createElement(
                       BridgePortalElementChild
@@ -82,13 +82,19 @@ const SolidToReactBridge = ({
       }
     >
       {
-        children
+        (
+          props
+          .children
+        )
         && portalDomElement()
         && (
           <Portal
             mount={portalDomElement()}
           >
-            {children}
+            {
+              props
+              .children
+            }
           </Portal>
         )
       }
