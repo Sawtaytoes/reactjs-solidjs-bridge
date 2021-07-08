@@ -33,7 +33,7 @@ const ReactStatefulComponent = ({
   return (
     <fieldset>
       <div>
-        Solid stateful component.
+        React stateful component.
       </div>
 
       <button
