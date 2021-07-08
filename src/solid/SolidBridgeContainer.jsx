@@ -8,22 +8,23 @@ import {
   Portal,
 } from 'solid-js/web'
 
-const SolidBridgeContainer = ({
-  getChildren,
-  subscribeToChildren,
-}) => {
+const SolidBridgeContainer = (
+  props,
+) => {
   const [
     children,
     setChildren,
   ] = (
     createSignal(
-      getChildren()
+      props
+      .getChildren()
     )
   )
 
   createEffect(() => {
     const unsubscribe = (
-      subscribeToChildren(
+      props
+      .subscribeToChildren(
         setChildren
       )
     )

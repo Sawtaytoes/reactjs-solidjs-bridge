@@ -1,13 +1,12 @@
 import {
-  createMemo,
   createSignal,
 } from 'solid-js'
 
 import SolidContext from './SolidContext.js'
 
-const SolidContextProvider = ({
-  children,
-}) => {
+const SolidContextProvider = (
+  props,
+) => {
   const [
     count,
     setCount,
@@ -26,16 +25,17 @@ const SolidContextProvider = ({
     ))
   }
 
-  const providerValue = (
-    createMemo(() => ({
-      count,
-      incrementCount,
-    }))
-  )
-
   return (
-    <SolidContext.Provider value={providerValue}>
-      {children}
+    <SolidContext.Provider
+      value={{
+        count,
+        incrementCount,
+      }}
+    >
+      {
+        props
+        .children
+      }
     </SolidContext.Provider>
   )
 }

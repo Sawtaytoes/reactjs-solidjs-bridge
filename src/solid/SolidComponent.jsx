@@ -1,13 +1,16 @@
-const SolidComponent = ({
-  children,
-}) => (
+const SolidComponent = (
+  props,
+) => (
   <fieldset>
     <div>
       Solid component.
     </div>
 
     {
-      children
+      (
+        props
+        .children
+      )
       ? (
         <div>
           with children.
@@ -18,7 +21,10 @@ const SolidComponent = ({
             </h3>
 
             <div>
-              {children}
+              {
+                props
+                .children
+              }
             </div>
           </fieldset>
         </div>

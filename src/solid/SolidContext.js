@@ -5,6 +5,10 @@ import {
 const SolidContext = (
   createContext({
     count: 'No count available.',
+    incrementCount: (
+      Function
+      .prototype
+    ),
   })
 )
 
