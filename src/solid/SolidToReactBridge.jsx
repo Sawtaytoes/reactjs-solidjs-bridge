@@ -14,8 +14,7 @@ import {
   Portal,
 } from 'solid-js/web'
 
-import BridgePortalElementChild from '../react/BridgePortalElementChild.jsx'
-import BridgePortalElementContext from '../react/BridgePortalElementContext.js'
+import ReactToSolidPortalElement from '../react/ReactToSolidPortalElement.jsx'
 
 const SolidToReactBridge = (
   props,
@@ -35,29 +34,19 @@ const SolidToReactBridge = (
     () => {
       render(
         (
-          createElement(
-            (
-              BridgePortalElementContext
-              .Provider
-            ),
-            {
-              children: (
-                props
-                .getReactComponent({
-                  getChildren: () => (
-                    createElement(
-                      BridgePortalElementChild
-                    )
-                  )
-                })
-              ),
-              value: {
-                getChildElement: (
-                  setPortalDomElement
-                )
-              },
-            }
-          )
+          props
+          .getReactComponent({
+            getChildren: () => (
+              createElement(
+                ReactToSolidPortalElement,
+                {
+                  getChildElement: (
+                    setPortalDomElement
+                  ),
+                },
+              )
+            )
+          })
         ),
         (
           solidToReactElementRef

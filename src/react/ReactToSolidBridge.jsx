@@ -15,10 +15,9 @@ import {
   Portal,
 } from 'solid-js/web'
 
-import BridgePortalElementChild from '../solid/BridgePortalElementChild.jsx'
-import BridgePortalElementContext from '../solid/BridgePortalElementContext.js'
 import ReactToSolidBridgeContext from './ReactToSolidBridgeContext.js'
 import SolidBridgeContainer from '../solid/SolidBridgeContainer.jsx'
+import SolidToReactPortalElement from '../solid/SolidToReactPortalElement.jsx'
 import useItems from './useItems.js'
 
 const initialSolidSignals = {}
@@ -184,37 +183,29 @@ const ReactToSolidBridge = ({
         Portal({
           get children() {
             return (
-              BridgePortalElementContext
-              .Provider({
-                get children() {
-                  return (
-                    getSolidComponentRef
-                    .current({
-                      getChildren: () => ([
-                        BridgePortalElementChild(),
-                        (
-                          SolidBridgeContainer({
-                            getChildren: (
-                              getSolidGrandchildren
-                            ),
-                            subscribeToChildren: (
-                              subscribeToSolidGrandchildren
-                            ),
-                          })
-                        )
-                      ]),
-                      props: (
-                        solidPropsRef
-                        .current
+              getSolidComponentRef
+              .current({
+                getChildren: () => ([
+                  SolidToReactPortalElement({
+                    getChildElement: (
+                      setPortalDomElement
+                    ),
+                  }),
+                  (
+                    SolidBridgeContainer({
+                      getChildren: (
+                        getSolidGrandchildren
+                      ),
+                      subscribeToChildren: (
+                        subscribeToSolidGrandchildren
                       ),
                     })
                   )
-                },
-                value: {
-                  getChildElement: (
-                    setPortalDomElement
-                  ),
-                },
+                ]),
+                props: (
+                  solidPropsRef
+                  .current
+                ),
               })
             )
           },
