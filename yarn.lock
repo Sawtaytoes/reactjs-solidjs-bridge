@@ -4096,10 +4096,10 @@ sockjs@^0.3.21:
     uuid "^3.4.0"
     websocket-driver "^0.7.4"
 
-solid-js@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/solid-js/-/solid-js-1.0.0.tgz#4bbc3f3932c604e2bfcd35d5a7f20408d208288e"
-  integrity sha512-5huTDVyMqZSjg5Sa4mwl15feK4il1cE68n4weL5NYGC8lX2wiDlcHhBdSB8trKgaJ50Q9/pwtLrQngFaDC+5Tw==
+solid-js@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/solid-js/-/solid-js-1.0.1.tgz#2c966f9b7873f25fd00c560753685f5b0cc84dae"
+  integrity sha512-/kKvlcrnksrXceCJJdZtctKJv/88+/415USXC54iUOZsnPKz0PUBkn0ZAO/mXqIhJKPpNwuoL+fQauUi067AUQ==
 
 source-list-map@^2.0.1:
   version "2.0.1"
