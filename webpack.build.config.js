@@ -20,9 +20,7 @@ const outputPath = (
 )
 
 const webpackConfig = {
-  entry: {
-    reactBundle: './src/libraryExport.js',
-  },
+  entry: './src/libraryExport.js',
   mode: 'production',
   module: {
     rules: [
