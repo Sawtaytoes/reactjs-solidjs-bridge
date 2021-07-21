@@ -26,6 +26,7 @@ const webpackConfig = {
     'react',
     'react-dom',
     'react/jsx-pragma',
+    'solid-js',
   ],
   mode: 'production',
   module: {
