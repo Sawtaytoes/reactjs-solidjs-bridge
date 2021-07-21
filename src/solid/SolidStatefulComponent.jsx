@@ -2,10 +2,9 @@ import {
   createSignal,
 } from 'solid-js'
 
-const SolidStatefulComponent = ({
-  children,
-  count = 0,
-}) => {
+const SolidStatefulComponent = (
+  props,
+) => {
   const [
     localCount,
     setLocalCount,
@@ -35,7 +34,7 @@ const SolidStatefulComponent = ({
         type="button"
       >
         <div>Local: {localCount()}</div>
-        <div>Controlled: {count}</div>
+        <div>Controlled: {props.count}</div>
       </button>
     </fieldset>
   )
