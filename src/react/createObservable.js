@@ -63,11 +63,16 @@ const createObservable = (
     )
 
     return () => {
-      cancelatorsRef
-      .current
-      .get(
-        subscriber
-      )?.()
+      const unsubscribe = (
+        cancelatorsRef
+        .current
+        .get(
+          subscriber
+        )
+      )
+
+      typeof unsubscribe === 'function'
+      && unsubscribe()
 
       const subscriberIndex = (
         subscribersRef
