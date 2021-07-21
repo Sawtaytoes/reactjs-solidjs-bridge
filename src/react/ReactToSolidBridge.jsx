@@ -234,10 +234,6 @@ const ReactToSolidBridge = ({
                       proxy,
                       propertyName,
                     ) => (
-                      propertyName === 'value' && console.log(solidPropsRef
-                        .current
-                        [propertyName]())||
-
                       (
                         propertyName in (
                           solidPropsRef
