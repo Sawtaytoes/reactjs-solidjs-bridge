@@ -26,6 +26,7 @@ const ReactToSolidBridge = ({
   children,
   getSolidComponent,
   props,
+  solidComponent,
 }) => {
   const {
     addSolidChild,
@@ -59,6 +60,13 @@ const ReactToSolidBridge = ({
   getSolidComponentRef
   .current = (
     getSolidComponent
+  )
+
+  const solidComponentRef = useRef()
+
+  solidComponentRef
+  .current = (
+    solidComponent
   )
 
   const propsRef = useRef()
@@ -189,35 +197,84 @@ const ReactToSolidBridge = ({
         )
       }
 
+      const getSolidChildren = () => ([
+        SolidToReactPortalElement({
+          getChildElement: (
+            setPortalDomElement
+          ),
+        }),
+        (
+          SolidBridgeContainer({
+            getChildren: (
+              getSolidGrandchildren
+            ),
+            subscribeToChildren: (
+              subscribeToSolidGrandchildren
+            ),
+          })
+        )
+      ])
+
       const SolidChildComponent = () => (
         Portal({
           get children() {
-            return (
-              getSolidComponentRef
-              .current({
-                getChildren: () => ([
-                  SolidToReactPortalElement({
-                    getChildElement: (
-                      setPortalDomElement
+            if (
+              solidComponentRef
+              .current
+            ) {
+              const proxy = (
+                new Proxy(
+                  {},
+                  {
+                    get: (
+                      proxy,
+                      propertyName,
+                    ) => (
+                      (
+                        propertyName in (
+                          solidPropsRef
+                          .current
+                        )
+                      )
+                      ? (
+                        solidPropsRef
+                        .current
+                        [propertyName]()
+                      )
+                      : (
+                        Reflect
+                        .get(
+                          proxy,
+                          propertyName,
+                        )
+                      )
                     ),
-                  }),
-                  (
-                    SolidBridgeContainer({
-                      getChildren: (
-                        getSolidGrandchildren
-                      ),
-                      subscribeToChildren: (
-                        subscribeToSolidGrandchildren
-                      ),
-                    })
-                  )
-                ]),
-                props: (
-                  solidPropsRef
-                  .current
-                ),
-              })
-            )
+                    get children() {
+                      return getSolidChildren()
+                    },
+                  }
+                )
+              )
+
+              return (
+                solidComponentRef
+                .current(
+                  proxy
+                )
+              )
+            }
+            else {
+              return (
+                getSolidComponentRef
+                .current({
+                  getChildren: getSolidChildren,
+                  props: (
+                    solidPropsRef
+                    .current
+                  ),
+                })
+              )
+            }
           },
           mount: (
             parentDomElement

@@ -35,7 +35,7 @@ This works because `ReactToSolidBridgeProvider` renders a  Solid app into a `div
 If this sounds complicated, it is. Thankfully, that's all been black-boxed, and you shouldn't have to worry about it.
 
 ## Examples
-### Basic Example (no children)
+### Basic Render Example
 
 ```jsx
 import {
@@ -48,27 +48,72 @@ import SolidComponent from '../solid/SolidComponent.jsx'
 const App = () => (
   <ReactToSolidBridgeProvider>
     <ReactToSolidBridge
-      getSolidComponent={({
-        props,
-      }) => (
-        SolidComponent({
-          count: (
-            props
-            .count
-          ),
-          incrementCount: (
-            props
-            .incrementCount
-          ),
-        })
-      )}
       props={{
-        count,
-        incrementCount,
+        count: 0,
+        incrementCount: () => {},
       }}
-    />
+      solidComponent={SolidComponent}
+    >
+      <ReactComponent />
+    </ReactToSolidBridge>
   </ReactToSolidBridgeProvider>
 )
+
+export default App
+```
+
+### Dynamic props
+
+```jsx
+import {
+  useCallback,
+  useState,
+} from 'react'
+import {
+  ReactToSolidBridge,
+  ReactToSolidBridgeProvider,
+} from 'react-solid-bridge'
+
+import SolidComponent from '../solid/SolidComponent.jsx'
+
+const App = () => {
+  const [
+    count,
+    setCount,
+  ] = (
+    useState(
+      0
+    )
+  )
+
+  const incrementCount = (
+    useCallback(
+      () => {
+        setCount((
+          localCount,
+        ) => (
+          localCount
+          + 1
+        ))
+      },
+      [],
+    )
+  )
+  
+  return (
+    <ReactToSolidBridgeProvider>
+      <ReactToSolidBridge
+        props={{
+          count,
+          incrementCount,
+        }}
+        solidComponent={SolidComponent}
+      >
+        <ReactComponent />
+      </ReactToSolidBridge>
+    </ReactToSolidBridgeProvider>
+  )
+}
 
 export default App
 ```
@@ -89,16 +134,7 @@ import SolidComponent from '../solid/SolidComponent.jsx'
 const App = () => (
   <ReactToSolidBridgeProvider>
     <ReactToSolidBridge
-      getSolidComponent={({
-        getChildren,
-        props,
-      }) => (
-        SolidComponent({
-          get children() {
-            return getChildren()
-          },
-        })
-      )}
+      solidComponent={SolidComponent}
     >
       <ReactComponent />
     </ReactToSolidBridge>
@@ -179,10 +215,12 @@ const App = () => (
                   }) => ([
                     SolidContextConsumer(),
                     SolidStatefulComponent({
-                      count: (
-                        props
-                        .count
-                      ),
+                      get count() {
+                        return (
+                          props
+                          .count()
+                        )
+                      },
                     }),
                     getChildren(),
                   ])}
