@@ -15,23 +15,15 @@ const getAbsolutePath = (
 
 const outputPath = (
   getAbsolutePath(
-    './build'
+    './dist'
   )
 )
 
 const webpackConfig = {
-  devServer: {
-    contentBase: outputPath,
-    host: '0.0.0.0',
-    hot: true,
-    publicPath: '/',
-  },
-  devtool: 'eval-source-map',
   entry: {
-    reactBundle: './src/react/reactEntrypoint.jsx',
-    solidBundle: './src/solid/solidEntrypoint.jsx',
+    reactBundle: './src/libraryExport.js',
   },
-  mode: 'development',
+  mode: 'production',
   module: {
     rules: [
       {
@@ -89,6 +81,7 @@ const webpackConfig = {
   },
   output: {
     filename: '[name].js',
+    libraryTarget: 'umd',
     path: outputPath,
   },
   // plugins: [],

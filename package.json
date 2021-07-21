@@ -1,13 +1,18 @@
 {
-  "name": "solid-react-conversion",
+  "name": "react-solid-bridge",
   "version": "0.0.0",
-  "main": "index.js",
   "license": "MIT",
-  "private": true,
-  "scripts": {
-    "start": "nodemon index.js"
+  "publishConfig": {
+    "access": "public"
   },
-  "dependencies": {
+  "browser": "dist/libraryExport.js",
+  "main": "dist/libraryExport.js",
+  "main:umd": "dist/libraryExport.js",
+  "scripts": {
+    "build": "node index.js build",
+    "start": "nodemon index.js start"
+  },
+  "devDependencies": {
     "@babel/core": "^7.14.6",
     "@babel/preset-env": "^7.14.7",
     "@babel/preset-react": "^7.14.5",
