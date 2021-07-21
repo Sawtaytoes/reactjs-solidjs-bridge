@@ -1,41 +1,50 @@
+import {
+  children as solidChildren,
+} from 'solid-js'
+
 const SolidComponent = (
   props,
-) => (
-  <fieldset>
-    <div>
-      Solid component.
-    </div>
-
-    {
-      (
+) => {
+  const getChildren = (
+    solidChildren(
+      () => (
         props
         .children
       )
-      ? (
-        <div>
-          with children.
+    )
+  )
 
-          <fieldset>
-            <h3>
-              React children show up here:
-            </h3>
+  return (
+    <fieldset>
+      <div>
+        Solid component.
+      </div>
 
-            <div>
-              {
-                props
-                .children
-              }
-            </div>
-          </fieldset>
-        </div>
-      )
-      : (
-        <div>
-          with no children.
-        </div>
-      )
-    }
-  </fieldset>
-)
+      {
+        getChildren()
+        ? (
+          <div>
+            with children.
+
+            <fieldset>
+              <h3>
+                React children show up here:
+              </h3>
+
+              <div>
+                {getChildren()}
+              </div>
+            </fieldset>
+          </div>
+        )
+        : (
+          <div>
+            with no children.
+          </div>
+        )
+      }
+    </fieldset>
+  )
+}
 
 export default SolidComponent
