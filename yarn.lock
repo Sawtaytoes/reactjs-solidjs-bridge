@@ -1307,6 +1307,15 @@ babel-plugin-jsx-dom-expressions@^0.29.0:
     "@babel/plugin-syntax-jsx" "^7.10.4"
     "@babel/types" "^7.11.5"
 
+babel-plugin-jsx-dom-expressions@~0.24.7:
+  version "0.24.7"
+  resolved "https://registry.yarnpkg.com/babel-plugin-jsx-dom-expressions/-/babel-plugin-jsx-dom-expressions-0.24.7.tgz#5d0730aac0c0079906229bd387e4324f9668255c"
+  integrity sha512-WaBX9z81sL0NDRVjeXr1GhJPkIMbz9GiT42/I6RqouN4y4kf6hEaARbG7NMk6YKOmc31o64fb0mYo3gj78nYmQ==
+  dependencies:
+    "@babel/helper-module-imports" "^7.10.4"
+    "@babel/plugin-syntax-jsx" "^7.10.4"
+    "@babel/types" "^7.11.5"
+
 babel-plugin-polyfill-corejs2@^0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/babel-plugin-polyfill-corejs2/-/babel-plugin-polyfill-corejs2-0.2.2.tgz#e9124785e6fd94f94b618a7954e5693053bf5327"
@@ -1330,6 +1339,13 @@ babel-plugin-polyfill-regenerator@^0.2.2:
   integrity sha512-Goy5ghsc21HgPDFtzRkSirpZVW35meGoTmTOb2bxqdl60ghub4xOidgNTHaZfQ2FaxQsKmwvXtOAkcIS4SMBWg==
   dependencies:
     "@babel/helper-define-polyfill-provider" "^0.2.2"
+
+babel-preset-solid@^0.23.0:
+  version "0.23.8"
+  resolved "https://registry.yarnpkg.com/babel-preset-solid/-/babel-preset-solid-0.23.8.tgz#90e5b6823cec1fcf67cd86fd89d9c4d369e1cf6e"
+  integrity sha512-LhdyOBc2h+Ny9K/eHWVDKQhfH0S0DOTcdRWo0L7jhP660XY2Jl8m2BkWGqsy6AST7SvcnhmoS8T0XHqaEFsGuA==
+  dependencies:
+    babel-plugin-jsx-dom-expressions "~0.24.7"
 
 babel-preset-solid@^1.0.0:
   version "1.0.0"
@@ -3496,6 +3512,14 @@ path-to-regexp@0.1.7:
   resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-0.1.7.tgz#df604178005f522f15eb4490e7247a1bfaa67f8c"
   integrity sha1-32BBeABfUi8V60SQ5yR6G/qmf4w=
 
+phosphor-solid@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/phosphor-solid/-/phosphor-solid-1.1.4.tgz#3c4a34728c530fe0b9b89dde9b96245fb2d411e2"
+  integrity sha512-dRmc8qOLmiTU+O2DrOOXr0M/Xd5sw7OZJawqa6GdZZdy7XUGNfpqp9hx7rZR7ttsSQ8Afa4nTKdH/GiBxFPDIw==
+  dependencies:
+    babel-preset-solid "^0.23.0"
+    solid-js "^0.23.3"
+
 picomatch@^2.0.4, picomatch@^2.2.1:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.3.0.tgz#f1f061de8f6a4bf022892e2d128234fb98302972"
@@ -4095,6 +4119,16 @@ sockjs@^0.3.21:
     faye-websocket "^0.11.3"
     uuid "^3.4.0"
     websocket-driver "^0.7.4"
+
+solid-app-router@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/solid-app-router/-/solid-app-router-0.1.0.tgz#299e1b2c661c9f730f0d1d8334899c09785cb93d"
+  integrity sha512-yTwmUxoP0d2h+BYA7z4eJJzqyZR+QabKV570x8P/hqYBivQD3pjULMbd0H+Brp5Bjhu3Vzdhd4gFjr1wt9ewnw==
+
+solid-js@^0.23.3:
+  version "0.23.11"
+  resolved "https://registry.yarnpkg.com/solid-js/-/solid-js-0.23.11.tgz#4af97d23628bf4527576cffaca01a3b678156967"
+  integrity sha512-AuDF3QWf99MMHkLjHN03OzvH7eyhCVOeMGmvKMb3ScFo5vkSgACN+GJs4K+DcUxx9TMbxMPHqodn4b1meD3sIw==
 
 solid-js@^1.0.1:
   version "1.0.1"

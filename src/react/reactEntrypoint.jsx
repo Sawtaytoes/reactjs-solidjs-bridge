@@ -9,6 +9,7 @@ import ReactComponent from './ReactComponent.jsx'
 import ReactContext from './ReactContext.js'
 import ReactContextConsumer from './ReactContextConsumer.jsx'
 import ReactContextProvider from './ReactContextProvider.jsx'
+import ReactSolidRouterExample from './ReactSolidRouterExample.jsx'
 import ReactStatefulComponent from './ReactStatefulComponent.jsx'
 import ReactToSolidBridge from './ReactToSolidBridge.jsx'
 import ReactToSolidBridgeProvider from './ReactToSolidBridgeProvider.jsx'
@@ -20,6 +21,8 @@ import SolidStatefulComponent from '../solid/SolidStatefulComponent.jsx'
 render(
   (
     <ReactToSolidBridgeProvider>
+      <ReactSolidRouterExample />
+
       <ReactContextProvider>
         <ReactContextConsumer />
 
@@ -39,9 +42,7 @@ render(
                     get children() {
                       return (
                         SolidComponent({
-                          get children() {
-                            return getChildren()
-                          },
+                          children: getChildren,
                         })
                       )
                     },
