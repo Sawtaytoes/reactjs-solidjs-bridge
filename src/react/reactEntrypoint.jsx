@@ -5,6 +5,7 @@ import {
   render,
 } from 'react-dom'
 
+import convertToReactComponent from './convertToReactComponent.jsx'
 import ReactComponent from './ReactComponent.jsx'
 import ReactContext from './ReactContext.js'
 import ReactContextConsumer from './ReactContextConsumer.jsx'
@@ -17,6 +18,16 @@ import SolidComponent from '../solid/SolidComponent.jsx'
 import SolidContext from '../solid/SolidContext.js'
 import SolidContextConsumer from '../solid/SolidContextConsumer.jsx'
 import SolidStatefulComponent from '../solid/SolidStatefulComponent.jsx'
+
+const ConvertedSolidContextConsumer = (
+  convertToReactComponent(SolidContextConsumer)
+)
+const ConvertedSolidComponent = (
+  convertToReactComponent(SolidComponent)
+)
+const ConvertedSolidStatefulComponent = (
+  convertToReactComponent(SolidStatefulComponent)
+)
 
 render(
   (
@@ -40,21 +51,19 @@ render(
                   SolidContext
                   .Provider({
                     get children() {
-                      return (
-                        SolidComponent({
-                          children: getChildren,
-                        })
-                      )
+                      return getChildren()
                     },
-                    value: {
-                      count: (
-                        props
-                        .count
-                      ),
-                      incrementCount: (
-                        props
-                        .incrementCount
-                      ),
+                    get value() {
+                      return {
+                        count: (
+                          props
+                          .count
+                        ),
+                        incrementCount: (
+                          props
+                          .incrementCount
+                        ),
+                      }
                     },
                   })
                 )}
@@ -63,33 +72,24 @@ render(
                   incrementCount,
                 }}
               >
-                <ReactContextConsumer />
+                <ConvertedSolidContextConsumer />
 
-                <ReactComponent>
-                  <ReactToSolidBridge
-                    getSolidComponent={({
-                      getChildren,
-                      props,
-                    }) => ([
-                      SolidContextConsumer(),
-                      SolidStatefulComponent({
-                        count: (
-                          props
-                          .count
-                        ),
-                      }),
-                      getChildren(),
-                    ])}
-                    props={{
-                      count,
-                    }}
-                  >
+                <ConvertedSolidComponent>
+                  <ReactContextConsumer />
+
+                  <ReactComponent>
+                    <ConvertedSolidContextConsumer />
+
+                    <ConvertedSolidStatefulComponent
+                      count={count}
+                    />
+
                     <ReactContextConsumer />
                     <ReactStatefulComponent
                       count={count}
                     />
-                  </ReactToSolidBridge>
-                </ReactComponent>
+                  </ReactComponent>
+                </ConvertedSolidComponent>
               </ReactToSolidBridge>
             )
           }

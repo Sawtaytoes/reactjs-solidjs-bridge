@@ -1,94 +1,73 @@
-import { Cube, Horse } from 'phosphor-solid'
-import { Router, Routes, Route, Link } from 'solid-app-router'
+import {
+  Cube as SolidCube,
+  Horse as SolidHorse,
+} from 'phosphor-solid'
+import {
+  Link as SolidLink,
+  Route,
+  Router as SolidRouter,
+  Routes,
+} from 'solid-app-router'
 
+import convertToReactComponent from './convertToReactComponent.jsx'
 import ReactToSolidBridge from './ReactToSolidBridge.jsx'
 
+const Cube = convertToReactComponent(SolidCube)
+const Horse = convertToReactComponent(SolidHorse)
+const Link = convertToReactComponent(SolidLink)
+const Router = convertToReactComponent(SolidRouter)
+
 const ReactSolidRouterExample = () => (
-  <ReactToSolidBridge
-    getSolidComponent={({
-      getChildren,
-    }) => (
-      Router({
-        get children() {
-          return getChildren();
-        }
-      })
-    )}
-  >
-    <ReactToSolidBridge
-      getSolidComponent={({
-        getChildren,
-      }) => (
-        Link({
-          get children() {
-            return getChildren();
-          },
-          href: '/',
-        })
-      )}
-    >
-      Home
-    </ReactToSolidBridge>
+  <fieldset>
+    <Router>
+      <Link href="/">
+        Home
+      </Link>
 
-    <ReactToSolidBridge
-      getSolidComponent={({
-        getChildren,
-      }) => (
-        Link({
-          get children() {
-            return getChildren();
-          },
-          href: '/about',
-        })
-      )}
-    >
-      About
-    </ReactToSolidBridge>
+      <Link href="/about">
+        About
+      </Link>
 
-    <ReactToSolidBridge
-      getSolidComponent={({
-        getChildren,
-      }) => (
-        Routes({
-          get children() {
-            return [
-              Route({
-                element: getChildren(),
-                path: '/',
-              }),
-            ]
-          }
-        })
-      )}
-    >
       <ReactToSolidBridge
-        props={{
-          color: 'pink',
-          size: 64,
-        }}
-        solidComponent={Horse}
-      />
-    </ReactToSolidBridge>
+        getSolidComponent={({
+          getChildren,
+        }) => (
+          Routes({
+            get children() {
+              return (
+                Route({
+                  element: getChildren(),
+                  path: '/',
+                })
+              )
+            }
+          })
+        )}
+      >
+        <Horse
+          color="pink"
+          size={64}
+        />
+      </ReactToSolidBridge>
 
-    <ReactToSolidBridge
-      getSolidComponent={({
-        getChildren,
-      }) => (
-        Routes({
-          get children() {
-            return [
-              Route({
-                element: getChildren(),
-                path: '/about',
-              }),
-            ]
-          }
-        })
-      )}
-    >
       <ReactToSolidBridge
-        props={{
-          color: () => (
+        getSolidComponent={({
+          getChildren,
+        }) => (
+          Routes({
+            get children() {
+              return (
+                Route({
+                  element: getChildren(),
+                  path: '/about',
+                })
+              )
+            }
+          })
+        )}
+      >
+        <Cube
+          color={() => (
             (
               Math
               .round(
@@ -98,14 +77,13 @@ const ReactSolidRouterExample = () => (
             )
             ? 'teal'
             : 'blue'
-          ),
-          size: 64,
-          weight: 'duotone',
-        }}
-        solidComponent={Cube}
-      />
-    </ReactToSolidBridge>
-  </ReactToSolidBridge>
+          )}
+          size={64}
+          weight="duotone"
+        />
+      </ReactToSolidBridge>
+    </Router>
+  </fieldset>
 )
 
 export default ReactSolidRouterExample

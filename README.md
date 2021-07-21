@@ -13,56 +13,72 @@ Solid -> React -> Solid
 ###### Incomplete
 Solid -> React -> Solid -> React -> ...
 
-## How to Use
-For rendering Solid components in React apps, you'll need to import 2 components:
-1. `ReactToSolidBridgeProvider`
-2. `ReactToSolidBridge`
+_**NOTE:** While context works in both Solid and React, their contexts aren't shared. You have to create a Solid context provider and pass it props from the React context if you want to keep them in sync. Typically, you can do this by passing props through `useContext` in React to Solid components._
 
-Import them like so:
+## How to Use
+For rendering Solid components in React apps, you have to import the provider component: `ReactToSolidBridgeProvider`.
+
+From there, it has multiple APIs:
+1. `convertToReactComponent` higher-order component (easiest).
+2. `ReactToSolidBridge` with the `solidComponent` prop (medium).
+3. `ReactToSolidBridge` with the `getSolidComponent` prop (confusing).
+
+You can import these like so:
 ```jsx
 import {
+  convertToReactComponent,
   ReactToSolidBridge,
   ReactToSolidBridgeProvider,
 } from 'react-solid-bridge'
 ```
 
+### `ReactToSolidBridgeProvider`
 You'll wrap either your entire app or the part that needs to render Solid.js components in `ReactToSolidBridgeProvider`. Ideally, this would be at the top-level of your app.
 
-The `ReactToSolidBridge` component renders Solid components and allows rendering React children in those Solid components.
+### `convertToReactComponent`
+`convertToReactComponent` is a friendly wrapper around `ReactToSolidBridge`. It allows you to convert Solid components into React components, but some things won't work right if they have weird APIs (like the `Routes` component from `solid-app-router`).
 
-This works because `ReactToSolidBridgeProvider` renders a  Solid app into a `div` element that it creates. From there, Solid components are portalled into a `div` rendered by `ReactToSolidBridge`.
+> _**NOTE:** This does not work with Solid context providers: `Context.Provider`. If you have one of those, you'll have to use `ReactToSolidBridge` with the `getSolidComponent` prop._
 
-If this sounds complicated, it is. Thankfully, that's all been black-boxed, and you shouldn't have to worry about it.
+Typically, this higher-order component will work without issue.
 
-## Examples
-### Basic Render Example
-
+You use it like so:
 ```jsx
 import {
-  ReactToSolidBridge,
+  Cube as SolidCube,
+  Horse as SolidHorse,
+} from 'phosphor-solid'
+import {
+  convertToReactComponent,
   ReactToSolidBridgeProvider,
 } from 'react-solid-bridge'
 
-import SolidComponent from '../solid/SolidComponent.jsx'
+const Cube = convertToReactComponent(SolidCube)
+const Horse = convertToReactComponent(SolidHorse)
 
 const App = () => (
   <ReactToSolidBridgeProvider>
-    <ReactToSolidBridge
-      props={{
-        count: 0,
-        incrementCount: () => {},
-      }}
-      solidComponent={SolidComponent}
-    >
-      <ReactComponent />
-    </ReactToSolidBridge>
+    <Cube />
+    <Horse />
   </ReactToSolidBridgeProvider>
 )
 
 export default App
 ```
 
-### Dynamic props
+Once you've done this, they'll function like regular React components.
+
+## `ReactToSolidBridge`
+`ReactToSolidBridge` is a React component that renders Solid components and allows rendering React children in those Solid components.
+
+This works because `ReactToSolidBridgeProvider` renders a  Solid app into a `div` element that it creates. From there, Solid components are portalled into a `div` rendered by `ReactToSolidBridge`.
+
+If this sounds complicated, it is. Thankfully, that's all been black-boxed, and you shouldn't have to worry about it.
+
+### Medium Difficulty API
+This is the same API used by the `convertToReactComponent` higher-order component. It's **highly recommended** to use that function instead.
+
+This example shows rendering both React `children` and props from React into a Solid component.
 
 ```jsx
 import {
@@ -74,6 +90,7 @@ import {
   ReactToSolidBridgeProvider,
 } from 'react-solid-bridge'
 
+import ReactComponent from './ReactComponent.jsx'
 import SolidComponent from '../solid/SolidComponent.jsx'
 
 const App = () => {
@@ -114,37 +131,95 @@ const App = () => {
     </ReactToSolidBridgeProvider>
   )
 }
-
-export default App
 ```
 
-### React -> Solid -> React with children
+### Customizable, but confusing and sometimes required, API
+> _**NOTE:** When creating a Solid component, `children` needs to be a getter, and it's **highly recommended** to do that with all non-function props as well._
 
-> _**NOTE:** When creating a Solid component, `children` needs to be a getter._
+If this is a local component, meaning you have Webpack configured to render both React and Solid JSX in the bundle, and this exists in your repository, then you only need `children` to be a getter.
+
+This example details using the customizable, but confusing API for `ReactToSolidBridge` and how you can render multiple Solid components next to each other this way.
+
+This API is not recommended unless you have a use case. If the other APIs throw errors, then this one might be right for you.
 
 ```jsx
+import {
+  useCallback,
+  useState,
+} from 'react'
 import {
   ReactToSolidBridge,
   ReactToSolidBridgeProvider,
 } from 'react-solid-bridge'
 
 import ReactComponent from './ReactComponent.jsx'
-import SolidComponent from '../solid/SolidComponent.jsx'
+import SolidComponent1 from '../solid/SolidComponent1.jsx'
+import SolidComponent2 from '../solid/SolidComponent2.jsx'
 
-const App = () => (
-  <ReactToSolidBridgeProvider>
-    <ReactToSolidBridge
-      solidComponent={SolidComponent}
-    >
-      <ReactComponent />
-    </ReactToSolidBridge>
-  </ReactToSolidBridgeProvider>
-)
+const App = () => {
+  const [
+    count,
+    setCount,
+  ] = (
+    useState(
+      0
+    )
+  )
 
-export default App
+  const incrementCount = (
+    useCallback(
+      () => {
+        setCount((
+          localCount,
+        ) => (
+          localCount
+          + 1
+        ))
+      },
+      [],
+    )
+  )
+  
+  return (
+    <ReactToSolidBridgeProvider>
+      <ReactToSolidBridge
+        props={{
+          count,
+          incrementCount,
+        }}
+        getSolidComponent={({
+          getChildren,
+          props,
+        }) => ([
+          SolidComponent1({
+            get children() {
+              return getChildren()
+            },
+            get count() {
+              return (
+                props
+                .count()
+              )
+            },
+          })
+          SolidComponent2({
+            incrementCount: (
+              props
+              .incrementCount
+            ),
+          })
+        ])}
+      >
+        <ReactComponent />
+      </ReactToSolidBridge>
+    </ReactToSolidBridgeProvider>
+  )
+}
 ```
 
-### Shared Context Example
+## Shared Context Example
+> _**NOTE:** When creating a Solid component, `children` needs to be a getter, and it's **highly recommended** to do that with all non-function props as well._
+
 This example shows rendering React children in Solid along with both React and Solid components having access to a shared context.
 
 ```jsx
