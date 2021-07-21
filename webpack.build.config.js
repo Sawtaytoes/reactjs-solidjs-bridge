@@ -21,6 +21,12 @@ const outputPath = (
 
 const webpackConfig = {
   entry: './src/libraryExport.js',
+  externals: [
+    'prop-types',
+    'react',
+    'react-dom',
+    'react/jsx-pragma',
+  ],
   mode: 'production',
   module: {
     rules: [
