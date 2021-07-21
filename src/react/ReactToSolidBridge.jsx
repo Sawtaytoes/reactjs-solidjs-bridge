@@ -224,7 +224,11 @@ const ReactToSolidBridge = ({
             ) {
               const proxy = (
                 new Proxy(
-                  {},
+                  {
+                    get children() {
+                      return getSolidChildren()
+                    }
+                  },
                   {
                     get: (
                       proxy,
@@ -249,9 +253,6 @@ const ReactToSolidBridge = ({
                         )
                       )
                     ),
-                    get children() {
-                      return getSolidChildren()
-                    },
                   }
                 )
               )
