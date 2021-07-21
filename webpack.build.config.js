@@ -82,7 +82,6 @@ const webpackConfig = {
     libraryTarget: 'umd',
     path: outputPath,
   },
-  // plugins: [],
 }
 
 module.exports = webpackConfig

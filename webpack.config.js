@@ -91,7 +91,6 @@ const webpackConfig = {
     filename: '[name].js',
     path: outputPath,
   },
-  // plugins: [],
 }
 
 module.exports = webpackConfig
