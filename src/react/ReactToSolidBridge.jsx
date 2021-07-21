@@ -94,18 +94,23 @@ const ReactToSolidBridge = ({
             )
           ) {
             solidSignalsRef
-            .current
-            [prop] = [
-              (
-                ...args
-              ) => (
-                propsRef
+            .current = {
+              ...(
+                solidSignalsRef
                 .current
-                [prop](
+              ),
+              [prop]: [
+                (
                   ...args
+                ) => (
+                  propsRef
+                  .current
+                  [prop](
+                    ...args
+                  )
                 )
-              )
-            ]
+              ],
+            }
           }
         }
         else {
@@ -117,13 +122,18 @@ const ReactToSolidBridge = ({
             )
           ) {
             solidSignalsRef
-            .current
-            [prop] = (
-              createSignal(
-                props
-                [prop]
-              )
-            )
+            .current = {
+              ...(
+                solidSignalsRef
+                .current
+              ),
+              [prop]: (
+                createSignal(
+                  props
+                  [prop]
+                )
+              ),
+            }
           }
           else {
             solidSignalsRef
