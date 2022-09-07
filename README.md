@@ -3,6 +3,17 @@ Render Solid.js components in React.js and visa versa.
 
 This library allows you to even render React children in Solid components rendered by React and retain both state and context!
 
+## Installation
+### npm
+```
+npm install react-solid-bridge
+```
+
+### yarn
+```
+yarn add react-solid-bridge
+```
+
 ## What works today
 ###### Working
 React -> Solid -> React -> Solid -> ...
