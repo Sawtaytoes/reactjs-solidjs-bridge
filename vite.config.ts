@@ -4,6 +4,10 @@ import {
 import solidPlugin from 'vite-plugin-solid'
 import reactPlugin from '@vitejs/plugin-react'
 
+import {
+  narrowSolidPlugin,
+} from './narrowSolidPlugin'
+
 // const restrictedSolidPlugin = solidPlugin()
 
 // const solidPluginTransform = (
@@ -40,7 +44,8 @@ export default defineConfig({
   },
   plugins: [
     // restrictedSolidPlugin,
-    solidPlugin(),
+    // solidPlugin(),
+    narrowSolidPlugin({ include: /\/src\/solid/ }),
     reactPlugin(),
     // reactPlugin({
     //   // exclude: './src/solid',

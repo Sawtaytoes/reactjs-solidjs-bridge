@@ -6,5 +6,7 @@
     "moduleResolution": "Node",
     "target": "ESNext",
   },
-  "include": ["vite.config.ts"],
+  "include": [
+    "*.ts"
+  ],
 }
