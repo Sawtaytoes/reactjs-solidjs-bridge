@@ -4,31 +4,31 @@ import {
 import solidPlugin from 'vite-plugin-solid'
 import reactPlugin from '@vitejs/plugin-react'
 
-const restrictedSolidPlugin = solidPlugin()
+// const restrictedSolidPlugin = solidPlugin()
 
-const solidPluginTransform = (
-  restrictedSolidPlugin
-  .transform
-)
+// const solidPluginTransform = (
+//   restrictedSolidPlugin
+//   .transform
+// )
 
-restrictedSolidPlugin
-.transform = (
-  function(ast, id) {
-    return (
-      id
-      .includes(
-        '/src/solid'
-      )
-      ? (
-        // @ts-expect-error
-        solidPluginTransform(
-          ...arguments
-        )
-      )
-      : null
-    )
-  }
-)
+// restrictedSolidPlugin
+// .transform = (
+//   function(ast, id) {
+//     return (
+//       id
+//       .includes(
+//         '/src/solid'
+//       )
+//       ? (
+//         // @ts-expect-error
+//         solidPluginTransform(
+//           ...arguments
+//         )
+//       )
+//       : null
+//     )
+//   }
+// )
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -39,7 +39,8 @@ export default defineConfig({
     'global': {},
   },
   plugins: [
-    restrictedSolidPlugin,
+    // restrictedSolidPlugin,
+    solidPlugin(),
     reactPlugin(),
     // reactPlugin({
     //   // exclude: './src/solid',
