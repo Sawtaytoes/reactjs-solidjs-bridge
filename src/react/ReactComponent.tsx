@@ -1,10 +1,19 @@
+import {
+  FunctionComponent,
+  type ReactNode,
+} from "react"
+
 export type ReactComponentProps = {
   children: ReactNode,
 }
 
-export const ReactComponent = ({
+export const ReactComponent: (
+  FunctionComponent<
+    ReactComponentProps
+  >
+) = ({
   children,
-}: ReactComponentProps) => (
+}) => (
   <fieldset>
     <div>
       React component.

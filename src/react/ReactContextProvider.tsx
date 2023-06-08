@@ -1,4 +1,6 @@
 import {
+  type FunctionComponent,
+  type ReactNode,
   useCallback,
   useMemo,
   useState,
@@ -6,7 +8,15 @@ import {
 
 import ReactContext from './ReactContext'
 
-const ReactContextProvider = ({
+export type ReactContextProviderProps = {
+  children: ReactNode,
+}
+
+export const ReactContextProvider: (
+  FunctionComponent<
+    ReactContextProviderProps
+  >
+) = ({
   children,
 }) => {
   const [

@@ -6,10 +6,18 @@ import {
   Component,
 } from 'solid-js'
 
-import ReactToSolidBridge from './ReactToSolidBridge'
+import {
+  ReactToSolidBridge,
+} from './ReactToSolidBridge'
 
-const convertToReactComponent = (
-  SolidComponent: Component,
+export const convertToReactComponent = <
+  Props,
+>(
+  SolidComponent: (
+    Component<
+      Props
+    >
+  ),
 ) => {
   const ConvertedSolidComponent = ({
     children,

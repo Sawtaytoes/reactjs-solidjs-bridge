@@ -17,10 +17,18 @@ import {
   Portal,
 } from 'solid-js/web'
 
-import ReactToSolidBridgeContext from './ReactToSolidBridgeContext'
-import SolidBridgeContainer from '../solid/SolidBridgeContainer'
-import SolidToReactPortalElement from '../solid/SolidToReactPortalElement'
-import useItems from './useItems'
+import {
+  ReactToSolidBridgeContext,
+} from './ReactToSolidBridgeContext'
+import {
+  SolidBridgeContainer,
+} from '../solid/SolidBridgeContainer'
+import {
+  SolidToReactPortalElement,
+} from '../solid/SolidToReactPortalElement'
+import {
+  useItems,
+} from './useItems'
 
 const initialSolidSignals = {}
 
@@ -62,30 +70,71 @@ export const ReactToSolidBridge = ({
     useState()
   )
 
-  const parentDomElement = useRef()
-
-  const getSolidComponentRef = useRef()
-
-  getSolidComponentRef
-  .current = (
-    getSolidComponent
+  const parentDomElement = (
+    useRef<
+      HTMLDivElement
+    >(
+      null
+    )
   )
 
-  const solidComponentRef = useRef()
-
-  solidComponentRef
-  .current = (
-    solidComponent
+  const getSolidComponentRef = (
+    useRef(
+      getSolidComponent
+    )
   )
 
-  const propsRef = useRef()
-
-  propsRef
-  .current = (
-    props
+  useEffect(
+    () => {
+      getSolidComponentRef
+      .current = (
+        getSolidComponent
+      )
+    },
+    [
+      getSolidComponent
+    ]
   )
 
-  const solidPropsRef = useRef()
+  const solidComponentRef = (
+    useRef(
+      solidComponent
+    )
+  )
+
+  useEffect(
+    () => {
+      solidComponentRef
+      .current = (
+        solidComponent
+      )
+    },
+    [
+      solidComponent
+    ]
+  )
+
+  const propsRef = (
+    useRef(
+      props
+    )
+  )
+
+  useEffect(
+    () => {
+      propsRef
+      .current = (
+        props
+      )
+    },
+    [
+      props
+    ]
+  )
+
+  const solidPropsRef = (
+    useRef()
+  )
 
   const solidSignalsRef = (
     useRef(

@@ -30,7 +30,7 @@ export type SolidToReactBridgeType = {
   }) => ReactElement
 }
 
-const SolidToReactBridge: (
+export const SolidToReactBridge: (
   ParentComponent<
     SolidToReactBridgeType
   >

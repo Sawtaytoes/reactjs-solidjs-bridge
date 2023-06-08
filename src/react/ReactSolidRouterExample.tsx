@@ -3,6 +3,9 @@ import {
   Horse as SolidHorse,
 } from 'phosphor-solid'
 import {
+  FunctionComponent,
+} from 'react'
+import {
   Link as SolidLink,
   Route,
   Router as SolidRouter,
@@ -17,7 +20,9 @@ const Horse = convertToReactComponent(SolidHorse)
 const Link = convertToReactComponent(SolidLink)
 const Router = convertToReactComponent(SolidRouter)
 
-const ReactSolidRouterExample = () => (
+export const ReactSolidRouterExample: (
+  FunctionComponent
+) = () => (
   <fieldset>
     <Router>
       <Link href="/">

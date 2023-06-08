@@ -8,7 +8,7 @@ import {
   createObservable,
 } from './createObservable'
 
-const useItems = <
+export const useItems = <
   Item,
 >() => {
   const {

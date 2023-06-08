@@ -5,42 +5,73 @@ import {
   render,
 } from 'solid-js/web'
 
-import convertToSolidComponent from './convertToSolidComponent'
-import ReactComponent from '../react/ReactComponent'
-import SolidComponent from './SolidComponent'
-import SolidContextConsumer from './SolidContextConsumer'
-import SolidContext from './SolidContext'
-import SolidContextProvider from './SolidContextProvider'
-import SolidToReactBridge from './SolidToReactBridge'
+import {
+  convertToSolidComponent,
+} from './convertToSolidComponent'
+import {
+  ReactComponent,
+} from '../react/ReactComponent'
+import {
+  SolidComponent,
+} from './SolidComponent'
+import {
+  SolidContextConsumer,
+} from './SolidContextConsumer'
+import {
+  SolidContextProvider,
+} from './SolidContextProvider'
+import {
+  SolidToReactBridge,
+} from './SolidToReactBridge'
 
 const ConvertedReactComponent = convertToSolidComponent(ReactComponent)
 
-render(
-  () => (
-    <SolidContextProvider>
-      <SolidContextConsumer />
-
-      <SolidToReactBridge
-      getReactComponent={({
-          getChildren,
-        }) => (
-          createElement(
-            ReactComponent,
-            {
-              children: getChildren(),
-            },
-          )
-        )}
-      >
-        <SolidComponent />
+const dispose = (
+  render(
+    () => (
+      <SolidContextProvider>
         <SolidContextConsumer />
-      </SolidToReactBridge>
-    </SolidContextProvider>
-  ),
-  (
-    document
-    .querySelector(
-      '#solid-root'
-    )
-  ),
+
+        <SolidToReactBridge
+        getReactComponent={({
+            getChildren,
+          }) => (
+            createElement(
+              ReactComponent,
+              {
+                children: getChildren(),
+              },
+            )
+          )}
+        >
+          <SolidComponent />
+          <SolidContextConsumer />
+        </SolidToReactBridge>
+      </SolidContextProvider>
+    ),
+    (
+      document
+      .getElementById(
+        'solid-root'
+      ) as (
+        HTMLDivElement
+      )
+    ),
+  )
 )
+
+if (
+  import
+  .meta
+  .hot
+) {
+  import
+  .meta
+  .hot
+  .accept()
+
+  import
+  .meta
+  .hot
+  .dispose(dispose)
+}

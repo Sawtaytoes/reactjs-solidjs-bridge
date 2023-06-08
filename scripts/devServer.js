@@ -20,8 +20,7 @@ new webpackDevServer(
   webpackCompiler
 )
 .start()
-.then((t) => {
-  console.log(t)
+.then(() => {
   console
   .info('Listening on port: 3000')
 })

@@ -1,10 +1,19 @@
 import {
+  ParentComponent,
   createSignal,
 } from 'solid-js'
 
 import SolidContext from './SolidContext'
 
-const SolidContextProvider = (
+export type SolidContextProviderProps = {
+  count?: number,
+}
+
+export const SolidContextProvider: (
+  ParentComponent<
+    SolidContextProviderProps
+  >
+) = (
   props,
 ) => {
   const [

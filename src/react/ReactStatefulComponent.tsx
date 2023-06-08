@@ -1,10 +1,18 @@
 import {
+  type FunctionComponent,
   useCallback,
   useState,
 } from 'react'
 
-const ReactStatefulComponent = ({
-  children,
+export type ReactStatefulComponentProps = {
+  count: number,
+}
+
+export const ReactStatefulComponent: (
+  FunctionComponent<
+    ReactStatefulComponentProps
+  >
+) = ({
   count = 0,
 }) => {
   const [

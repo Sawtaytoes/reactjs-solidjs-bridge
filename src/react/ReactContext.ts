@@ -2,10 +2,24 @@ import {
   createContext,
 } from 'react'
 
-const ReactContext = (
-  createContext({
-    count: 'No count available.',
-  })
+export type ReactContextType = {
+  count: number,
+  incrementCount: () => (
+    void
+  ),
+}
+
+export const defaultReactContextValue: (
+  ReactContextType
+) = {
+  count: 0,
+  incrementCount: () => {},
+}
+
+export const ReactContext = (
+  createContext(
+    defaultReactContextValue
+  )
 )
 
 export default ReactContext

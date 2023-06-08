@@ -1,12 +1,20 @@
-const SolidToReactPortalElement = ({
+export const SolidToReactPortalElement = ({
   getChildElement,
+}: {
+  getChildElement: (
+    domElement: (
+      HTMLElement
+    )
+  ) => void
 }) => {
   const domElement = <div />
 
   getChildElement(
-    domElement
+    domElement as (
+      HTMLDivElement
+    )
   )
-  
+
   return domElement
 }
 

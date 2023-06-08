@@ -1,14 +1,36 @@
 import {
+  type Component,
+  type ParentComponent,
   createEffect,
   createSignal,
   For,
   onCleanup,
 } from 'solid-js'
-import {
-  Portal,
-} from 'solid-js/web'
 
-const SolidBridgeContainer = (
+export type SolidBridgeContainerType = {
+  getChildren: () => (
+    Component
+  ),
+  subscribeToChildren: (
+    subscriber: (
+      children: (
+        Component
+      )
+    ) => (
+      void
+    ),
+  ) => (
+    () => (
+      void
+    )
+  )
+}
+
+export const SolidBridgeContainer: (
+  ParentComponent<
+    SolidBridgeContainerType
+  >
+) = (
   props,
 ) => {
   const [
@@ -24,9 +46,13 @@ const SolidBridgeContainer = (
   createEffect(() => {
     const unsubscribe = (
       props
-      .subscribeToChildren(
-        setChildren
-      )
+      .subscribeToChildren((
+        children,
+      ) => {
+        setChildren(
+          children
+        )
+      })
     )
 
     onCleanup(() => {

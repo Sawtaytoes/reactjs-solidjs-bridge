@@ -4,5 +4,7 @@
     "composite": true,
     "module": "ESNext",
     "moduleResolution": "Node",
+    "target": "ESNext",
   },
+  "include": ["vite.config.ts"],
 }

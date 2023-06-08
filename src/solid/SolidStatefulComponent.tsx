@@ -7,7 +7,7 @@ export type SolidStatefulComponentType = {
   count: number,
 }
 
-const SolidStatefulComponent: (
+export const SolidStatefulComponent: (
   Component<
     SolidStatefulComponentType
   >

@@ -1,17 +1,25 @@
 import {
-  ReactNode,
+  type ReactNode,
   useEffect,
   useMemo,
   useRef,
 } from 'react'
 import {
+  type Component,
+} from 'solid-js'
+import {
   render,
 } from 'solid-js/web'
 
-import ReactToSolidBridgeContext from './ReactToSolidBridgeContext'
-import SolidBridgeContainer from '../solid/SolidBridgeContainer'
-import useItems from './useItems'
-import { Component } from 'solid-js'
+import {
+  ReactToSolidBridgeContext,
+} from './ReactToSolidBridgeContext'
+import {
+  SolidBridgeContainer,
+} from '../solid/SolidBridgeContainer'
+import {
+  useItems,
+} from './useItems'
 
 export type ReactToSolidBridgeProviderType = {
   children: ReactNode,

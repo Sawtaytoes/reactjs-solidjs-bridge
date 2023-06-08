@@ -4,7 +4,7 @@ import {
 
 import SolidContext from './SolidContext'
 
-const SolidContextConsumer = () => {
+export const SolidContextConsumer = () => {
   const {
     count,
     incrementCount,
@@ -24,7 +24,11 @@ const SolidContextConsumer = () => {
         onClick={incrementCount}
         type="button"
       >
-        {count()}
+        {
+          count() === -1
+          ? 'No count available.'
+          : count()
+        }
       </button>
     </fieldset>
   )

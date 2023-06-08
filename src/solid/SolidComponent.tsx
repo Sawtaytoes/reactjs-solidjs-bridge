@@ -3,7 +3,7 @@ import {
   children as solidChildren,
 } from 'solid-js'
 
-const SolidComponent: (
+export const SolidComponent: (
   ParentComponent
 ) = (
   props,

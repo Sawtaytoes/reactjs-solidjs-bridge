@@ -2,6 +2,7 @@
   "compilerOptions": {
     "composite": true,
     "jsx": "react-jsx",
+    "jsxImportSource": "react", // Might be optional.
   },
   "extends": "../../tsconfig.json",
 }

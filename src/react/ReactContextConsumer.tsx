@@ -1,10 +1,13 @@
 import {
+  type FunctionComponent,
   useContext,
 } from 'react'
 
 import ReactContext from './ReactContext'
 
-const ReactContextConsumer = () => {
+export const ReactContextConsumer: (
+  FunctionComponent
+) = () => {
   const {
     count,
     incrementCount,
