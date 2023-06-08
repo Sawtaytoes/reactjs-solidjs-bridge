@@ -33,7 +33,7 @@ const dispose = (
         <SolidContextConsumer />
 
         <SolidToReactBridge
-        getReactComponent={({
+          getReactComponent={({
             getChildren,
           }) => (
             createElement(
