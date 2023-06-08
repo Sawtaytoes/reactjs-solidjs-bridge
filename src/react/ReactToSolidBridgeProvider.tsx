@@ -1,4 +1,5 @@
 import {
+  ReactNode,
   useEffect,
   useMemo,
   useRef,
@@ -7,14 +8,20 @@ import {
   render,
 } from 'solid-js/web'
 
-import ReactToSolidBridgeContext from './ReactToSolidBridgeContext.js'
-import SolidBridgeContainer from '../solid/SolidBridgeContainer.jsx'
-import useItems from './useItems.js'
+import ReactToSolidBridgeContext from './ReactToSolidBridgeContext'
+import SolidBridgeContainer from '../solid/SolidBridgeContainer'
+import useItems from './useItems'
+import { Component } from 'solid-js'
 
-const ReactToSolidBridgeProvider = ({
+export type ReactToSolidBridgeProviderType = {
+  children: ReactNode,
+  getSolidComponent: () => Component,
+}
+
+export const ReactToSolidBridgeProvider = ({
   children,
   getSolidComponent,
-}) => {
+}: ReactToSolidBridgeProviderType) => {
   const {
     addItem: addSolidChild,
     getItems: getSolidChildren,
@@ -24,7 +31,13 @@ const ReactToSolidBridgeProvider = ({
     useItems()
   )
 
-  const parentDomElement = useRef()
+  const parentDomElement = (
+    useRef<
+      HTMLDivElement
+    >(
+      null
+    )
+  )
 
   useEffect(
     () => {
@@ -42,7 +55,9 @@ const ReactToSolidBridgeProvider = ({
           ),
           (
             parentDomElement
-            .current
+            .current as (
+              HTMLDivElement
+            )
           ),
         )
       )

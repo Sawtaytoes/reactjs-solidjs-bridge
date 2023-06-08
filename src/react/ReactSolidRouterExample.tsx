@@ -9,8 +9,8 @@ import {
   Routes,
 } from 'solid-app-router'
 
-import convertToReactComponent from './convertToReactComponent.jsx'
-import ReactToSolidBridge from './ReactToSolidBridge.jsx'
+import convertToReactComponent from './convertToReactComponent'
+import ReactToSolidBridge from './ReactToSolidBridge'
 
 const Cube = convertToReactComponent(SolidCube)
 const Horse = convertToReactComponent(SolidHorse)

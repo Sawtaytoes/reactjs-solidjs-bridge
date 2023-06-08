@@ -1,8 +1,17 @@
 import {
+  type Component,
   createSignal,
 } from 'solid-js'
 
-const SolidStatefulComponent = (
+export type SolidStatefulComponentType = {
+  count: number,
+}
+
+const SolidStatefulComponent: (
+  Component<
+    SolidStatefulComponentType
+  >
+) = (
   props,
 ) => {
   const [

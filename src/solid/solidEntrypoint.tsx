@@ -5,12 +5,15 @@ import {
   render,
 } from 'solid-js/web'
 
-import ReactComponent from '../react/ReactComponent.jsx'
-import SolidComponent from './SolidComponent.jsx'
-import SolidContextConsumer from './SolidContextConsumer.jsx'
-import SolidContext from './SolidContext.js'
-import SolidContextProvider from './SolidContextProvider.jsx'
-import SolidToReactBridge from './SolidToReactBridge.jsx'
+import convertToSolidComponent from './convertToSolidComponent'
+import ReactComponent from '../react/ReactComponent'
+import SolidComponent from './SolidComponent'
+import SolidContextConsumer from './SolidContextConsumer'
+import SolidContext from './SolidContext'
+import SolidContextProvider from './SolidContextProvider'
+import SolidToReactBridge from './SolidToReactBridge'
+
+const ConvertedReactComponent = convertToSolidComponent(ReactComponent)
 
 render(
   () => (
@@ -18,7 +21,7 @@ render(
       <SolidContextConsumer />
 
       <SolidToReactBridge
-        getReactComponent={({
+      getReactComponent={({
           getChildren,
         }) => (
           createElement(

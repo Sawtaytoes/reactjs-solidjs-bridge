@@ -1,6 +1,10 @@
-const ReactComponent = ({
+export type ReactComponentProps = {
+  children: ReactNode,
+}
+
+export const ReactComponent = ({
   children,
-}) => (
+}: ReactComponentProps) => (
   <fieldset>
     <div>
       React component.

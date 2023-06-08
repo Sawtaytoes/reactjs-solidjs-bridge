@@ -1,6 +1,9 @@
 const webpack = require('webpack');
 const webpackDevServer = require('webpack-dev-server');
 
+const {
+  outputPath,
+} = require('../getOutputPath')
 const webpackConfig = require('../webpack.config.js');
 
 const webpackCompiler = (
@@ -10,12 +13,15 @@ const webpackCompiler = (
 )
 
 new webpackDevServer(
+  (
+    webpackConfig
+    .devServer
+  ),
   webpackCompiler
 )
-.listen(
-  3000,
-  () => {
-    console
-    .info('Listening on port: 3000')
-  },
-)
+.start()
+.then((t) => {
+  console.log(t)
+  console
+  .info('Listening on port: 3000')
+})

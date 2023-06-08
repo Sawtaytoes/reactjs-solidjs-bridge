@@ -1,33 +1,33 @@
 import {
   useContext,
-} from 'react'
+} from 'solid-js'
 
-import ReactContext from './ReactContext.js'
+import SolidContext from './SolidContext'
 
-const ReactContextConsumer = () => {
+const SolidContextConsumer = () => {
   const {
     count,
     incrementCount,
   } = (
     useContext(
-      ReactContext
+      SolidContext
     )
   )
 
   return (
     <fieldset>
       <div>
-        React context consumer.
+        Solid context consumer.
       </div>
 
       <button
         onClick={incrementCount}
         type="button"
       >
-        {count}
+        {count()}
       </button>
     </fieldset>
   )
 }
 
-export default ReactContextConsumer
+export default SolidContextConsumer

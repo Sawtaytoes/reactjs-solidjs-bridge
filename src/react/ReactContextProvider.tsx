@@ -4,7 +4,7 @@ import {
   useState,
 } from 'react'
 
-import ReactContext from './ReactContext.js'
+import ReactContext from './ReactContext'
 
 const ReactContextProvider = ({
   children,
@@ -31,7 +31,7 @@ const ReactContextProvider = ({
       [],
     )
   )
-  
+
   const providerValue = (
     useMemo(
       () => ({
@@ -44,7 +44,7 @@ const ReactContextProvider = ({
       ],
     )
   )
-  
+
   return (
     <ReactContext.Provider value={providerValue}>
       {children}

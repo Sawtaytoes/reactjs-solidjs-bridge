@@ -1,9 +1,9 @@
 const scripts = {
   build: () => {
-    require('./scripts/build.js')
+    require('./scripts/build')
   },
   start: () => {
-    require('./scripts/devServer.js')
+    require('./scripts/devServer')
   },
 }
 

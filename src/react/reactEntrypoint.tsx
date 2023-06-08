@@ -5,19 +5,19 @@ import {
   render,
 } from 'react-dom'
 
-import convertToReactComponent from './convertToReactComponent.jsx'
-import ReactComponent from './ReactComponent.jsx'
-import ReactContext from './ReactContext.js'
-import ReactContextConsumer from './ReactContextConsumer.jsx'
-import ReactContextProvider from './ReactContextProvider.jsx'
-import ReactSolidRouterExample from './ReactSolidRouterExample.jsx'
-import ReactStatefulComponent from './ReactStatefulComponent.jsx'
-import ReactToSolidBridge from './ReactToSolidBridge.jsx'
-import ReactToSolidBridgeProvider from './ReactToSolidBridgeProvider.jsx'
-import SolidComponent from '../solid/SolidComponent.jsx'
-import SolidContext from '../solid/SolidContext.js'
-import SolidContextConsumer from '../solid/SolidContextConsumer.jsx'
-import SolidStatefulComponent from '../solid/SolidStatefulComponent.jsx'
+import convertToReactComponent from './convertToReactComponent'
+import ReactComponent from './ReactComponent'
+import ReactContext from './ReactContext'
+import ReactContextConsumer from './ReactContextConsumer'
+import ReactContextProvider from './ReactContextProvider'
+import ReactSolidRouterExample from './ReactSolidRouterExample'
+import ReactStatefulComponent from './ReactStatefulComponent'
+import ReactToSolidBridge from './ReactToSolidBridge'
+import ReactToSolidBridgeProvider from './ReactToSolidBridgeProvider'
+import SolidComponent from '../solid/SolidComponent'
+import SolidContext from '../solid/SolidContext'
+import SolidContextConsumer from '../solid/SolidContextConsumer'
+import SolidStatefulComponent from '../solid/SolidStatefulComponent'
 
 const ConvertedSolidContextConsumer = (
   convertToReactComponent(SolidContextConsumer)

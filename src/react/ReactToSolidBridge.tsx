@@ -1,4 +1,5 @@
 import {
+  type ReactNode,
   useContext,
   useEffect,
   useMemo,
@@ -9,25 +10,33 @@ import {
   createPortal,
 } from 'react-dom'
 import {
+  type ParentComponent,
   createSignal,
 } from 'solid-js'
 import {
   Portal,
 } from 'solid-js/web'
 
-import ReactToSolidBridgeContext from './ReactToSolidBridgeContext.js'
-import SolidBridgeContainer from '../solid/SolidBridgeContainer.jsx'
-import SolidToReactPortalElement from '../solid/SolidToReactPortalElement.jsx'
-import useItems from './useItems.js'
+import ReactToSolidBridgeContext from './ReactToSolidBridgeContext'
+import SolidBridgeContainer from '../solid/SolidBridgeContainer'
+import SolidToReactPortalElement from '../solid/SolidToReactPortalElement'
+import useItems from './useItems'
 
 const initialSolidSignals = {}
 
-const ReactToSolidBridge = ({
+export type ReactToSolidBridgeType = {
+  children: ReactNode,
+  getSolidComponent: () => ParentComponent,
+  props: Record<string, any>,
+  solidComponent: ParentComponent,
+}
+
+export const ReactToSolidBridge = ({
   children,
   getSolidComponent,
   props,
   solidComponent,
-}) => {
+}: ReactToSolidBridgeType) => {
   const {
     addSolidChild,
     removeSolidChild,

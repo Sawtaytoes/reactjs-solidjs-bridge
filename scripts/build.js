@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const webpackDevServer = require('webpack-dev-server');
 
-const webpackBuildConfig = require('../webpack.build.config.js');
+const webpackBuildConfig = require('../webpack.build.config');
 
 const webpackCompiler = (
   webpack(

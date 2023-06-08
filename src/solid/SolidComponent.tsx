@@ -1,8 +1,11 @@
 import {
+  ParentComponent,
   children as solidChildren,
 } from 'solid-js'
 
-const SolidComponent = (
+const SolidComponent: (
+  ParentComponent
+) = (
   props,
 ) => {
   const getChildren = (

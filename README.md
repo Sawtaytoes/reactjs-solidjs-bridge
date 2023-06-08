@@ -101,8 +101,8 @@ import {
   ReactToSolidBridgeProvider,
 } from 'react-solid-bridge'
 
-import ReactComponent from './ReactComponent.jsx'
-import SolidComponent from '../solid/SolidComponent.jsx'
+import ReactComponent from './ReactComponent'
+import SolidComponent from '../solid/SolidComponent'
 
 const App = () => {
   const [
@@ -127,7 +127,7 @@ const App = () => {
       [],
     )
   )
-  
+
   return (
     <ReactToSolidBridgeProvider>
       <ReactToSolidBridge
@@ -163,9 +163,9 @@ import {
   ReactToSolidBridgeProvider,
 } from 'react-solid-bridge'
 
-import ReactComponent from './ReactComponent.jsx'
-import SolidComponent1 from '../solid/SolidComponent1.jsx'
-import SolidComponent2 from '../solid/SolidComponent2.jsx'
+import ReactComponent from './ReactComponent'
+import SolidComponent1 from '../solid/SolidComponent1'
+import SolidComponent2 from '../solid/SolidComponent2'
 
 const App = () => {
   const [
@@ -190,7 +190,7 @@ const App = () => {
       [],
     )
   )
-  
+
   return (
     <ReactToSolidBridgeProvider>
       <ReactToSolidBridge
@@ -239,15 +239,15 @@ import {
   ReactToSolidBridgeProvider,
 } from 'react-solid-bridge'
 
-import ReactComponent from './ReactComponent.jsx'
-import ReactContext from './ReactContext.js'
-import ReactContextConsumer from './ReactContextConsumer.jsx'
-import ReactContextProvider from './ReactContextProvider.jsx'
-import ReactStatefulComponent from './ReactStatefulComponent.jsx'
-import SolidComponent from '../solid/SolidComponent.jsx'
-import SolidContext from '../solid/SolidContext.js'
-import SolidContextConsumer from '../solid/SolidContextConsumer.jsx'
-import SolidStatefulComponent from '../solid/SolidStatefulComponent.jsx'
+import ReactComponent from './ReactComponent'
+import ReactContext from './ReactContext'
+import ReactContextConsumer from './ReactContextConsumer'
+import ReactContextProvider from './ReactContextProvider'
+import ReactStatefulComponent from './ReactStatefulComponent'
+import SolidComponent from '../solid/SolidComponent'
+import SolidContext from '../solid/SolidContext'
+import SolidContextConsumer from '../solid/SolidContextConsumer'
+import SolidStatefulComponent from '../solid/SolidStatefulComponent'
 
 const App = () => (
   <ReactToSolidBridgeProvider>

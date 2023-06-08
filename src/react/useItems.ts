@@ -1,13 +1,16 @@
 import {
   useCallback,
-  useEffect,
   useMemo,
   useState,
 } from 'react'
 
-import createObservable from './createObservable'
+import {
+  createObservable,
+} from './createObservable'
 
-const useItems = () => {
+const useItems = <
+  Item,
+>() => {
   const {
     getValue: getItems,
     publish: publishItems,
@@ -15,7 +18,11 @@ const useItems = () => {
   } = (
     useMemo(
       () => (
-        createObservable(
+        createObservable<
+          Array<
+            Item
+          >
+        >(
           []
         )
       ),
@@ -26,7 +33,7 @@ const useItems = () => {
   const addItem = (
     useCallback(
       (
-        item,
+        item: Item,
       ) => {
         publishItems(
           getItems()
@@ -45,7 +52,7 @@ const useItems = () => {
   const removeItem = (
     useCallback(
       (
-        item,
+        item: Item,
       ) => {
         const items = (
           getItems()

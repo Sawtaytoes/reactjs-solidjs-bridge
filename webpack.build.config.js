@@ -20,7 +20,7 @@ const outputPath = (
 )
 
 const webpackConfig = {
-  entry: './src/libraryExport.js',
+  entry: './src/libraryExport',
   externals: [
     'prop-types',
     'react',
@@ -37,12 +37,13 @@ const webpackConfig = {
             './src/react'
           )
         ),
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         use: {
           loader: 'babel-loader',
           options: {
             cacheDirectory: true,
             presets: [
+              '@babel/preset-typescript',
               [
                 '@babel/preset-env',
                 {
@@ -65,12 +66,13 @@ const webpackConfig = {
             './src/solid'
           )
         ),
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         use: {
           loader: 'babel-loader',
           options: {
             cacheDirectory: true,
             presets: [
+              '@babel/preset-typescript',
               [
                 '@babel/preset-env',
                 {
@@ -85,9 +87,17 @@ const webpackConfig = {
     ],
   },
   output: {
-    filename: '[name].js',
+    filename: '[name]',
     libraryTarget: 'umd',
     path: outputPath,
+  },
+  resolve: {
+    extensions: [
+      '.js',
+      '.jsx',
+      '.ts',
+      '.tsx',
+    ],
   },
 }
 

@@ -1,16 +1,21 @@
 import {
+  ReactNode,
   memo,
-  useMemo,
 } from 'react'
+import {
+  Component,
+} from 'solid-js'
 
-import ReactToSolidBridge from './ReactToSolidBridge.jsx'
+import ReactToSolidBridge from './ReactToSolidBridge'
 
 const convertToReactComponent = (
-  SolidComponent,
+  SolidComponent: Component,
 ) => {
   const ConvertedSolidComponent = ({
     children,
     ...props
+  }: {
+    children: ReactNode,
   }) => (
     <ReactToSolidBridge
       props={props}

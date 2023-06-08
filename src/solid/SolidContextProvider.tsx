@@ -2,7 +2,7 @@ import {
   createSignal,
 } from 'solid-js'
 
-import SolidContext from './SolidContext.js'
+import SolidContext from './SolidContext'
 
 const SolidContextProvider = (
   props,

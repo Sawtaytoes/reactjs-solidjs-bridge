@@ -1,35 +1,21 @@
-const path = require('path')
+const {
+  getAbsolutePath,
+  outputPath,
+} = require('./getOutputPath')
 
-const getAbsolutePath = (
-  filePath,
-) => (
-  path
-  .join(
-    (
-      process
-      .cwd()
-    ),
-    filePath,
-  )
-)
-
-const outputPath = (
-  getAbsolutePath(
-    './build'
-  )
-)
-
+/** @type { import('webpack').Configuration } */
 const webpackConfig = {
   devServer: {
-    contentBase: outputPath,
+    // contentBase: outputPath,
     host: '0.0.0.0',
     hot: true,
-    publicPath: '/',
+    port: 3000,
+    // publicPath: '/',
   },
   devtool: 'eval-source-map',
   entry: {
-    reactBundle: './src/react/reactEntrypoint.jsx',
-    solidBundle: './src/solid/solidEntrypoint.jsx',
+    reactBundle: './src/react/reactEntrypoint.tsx',
+    solidBundle: './src/solid/solidEntrypoint.tsx',
   },
   mode: 'development',
   module: {
@@ -40,12 +26,13 @@ const webpackConfig = {
             './src/react'
           )
         ),
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         use: {
           loader: 'babel-loader',
           options: {
             cacheDirectory: true,
             presets: [
+              '@babel/preset-typescript',
               [
                 '@babel/preset-env',
                 {
@@ -68,12 +55,13 @@ const webpackConfig = {
             './src/solid'
           )
         ),
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         use: {
           loader: 'babel-loader',
           options: {
             cacheDirectory: true,
             presets: [
+              '@babel/preset-typescript',
               [
                 '@babel/preset-env',
                 {
@@ -88,8 +76,17 @@ const webpackConfig = {
     ],
   },
   output: {
-    filename: '[name].js',
+    filename: '[name]',
     path: outputPath,
+    publicPath: '/',
+  },
+  resolve: {
+    extensions: [
+      '.js',
+      '.jsx',
+      '.ts',
+      '.tsx',
+    ],
   },
 }
 
